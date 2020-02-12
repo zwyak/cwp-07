@@ -2,6 +2,8 @@ const fs = require('fs');
 const utils = require('./utils.js');
 let articles = require('./articles.json');
 
+module.exports.articles = articles;
+
 function arReadAll(req, res, payload, cb) {
   cb(null, utils.modifyArray(articles, payload.sortField, payload.sortOrder, payload.limit, payload.page, payload.includeDeps) );
 }

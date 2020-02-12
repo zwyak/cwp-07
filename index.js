@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 let articles = require('./articles.json');
 const ar = require('./articles.js');
 const com = require('./comments.js');
@@ -17,7 +18,10 @@ const handlers = {
   '/api/articles/delete': ar.arDelete,
   '/api/comments/create': com.comCreate,
   '/api/comments/delete': com.comDelete,
-  '/api/logs': readLogs
+  '/api/logs': readLogs,
+  '/': home,
+  '/index.html': home,
+  '/app.js': app
 };
 
 const server = http.createServer((req, res) => {
@@ -37,8 +41,10 @@ const server = http.createServer((req, res) => {
       }
 
       res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.end( JSON.stringify(result) );
+      //res.setHeader('Content-Type', 'application/json');
+      //res.end( JSON.stringify(result) );
+      res.setHeader('Content-Type', 'text/html');
+      res.end( result );
       logger.info(req.url);
       logs.push({datetime: new Date(Date.now()).toString(), url: req.url, status: res.statusCode});
     });
@@ -65,7 +71,12 @@ function parseBodyJson(req, cb) {
   }).on('end', function() {
     body = Buffer.concat(body).toString();
 
-    let params = JSON.parse(body);
+    let params;
+    if (body){
+      params = JSON.parse(body);
+    }else{
+      params = [];
+    }
 
     cb(null, params);
   });
@@ -73,4 +84,18 @@ function parseBodyJson(req, cb) {
 
 function readLogs(req, res, payload, cb) {
   cb(null, logs);
+}
+
+function home(req, res, payload, cb) {
+  fs.readFile('./public/index.html', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
+}
+
+function app(req, res, payload, cb) {
+  fs.readFile('./public/index.js', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
 }
