@@ -41,10 +41,14 @@ const server = http.createServer((req, res) => {
       }
 
       res.statusCode = 200;
-      //res.setHeader('Content-Type', 'application/json');
-      //res.end( JSON.stringify(result) );
-      res.setHeader('Content-Type', 'text/html');
-      res.end( result );
+      if(res.getHeader('Content-Type') == 'text/html'){
+        res.setHeader('Content-Type', 'text/html');
+        res.end( result );
+      }else{
+        res.setHeader('Content-Type', 'application/json');
+        res.end( JSON.stringify(result) );
+      }
+
       logger.info(req.url);
       logs.push({datetime: new Date(Date.now()).toString(), url: req.url, status: res.statusCode});
     });
@@ -70,7 +74,7 @@ function parseBodyJson(req, cb) {
     body.push(chunk);
   }).on('end', function() {
     body = Buffer.concat(body).toString();
-
+    console.log(body);
     let params;
     if (body){
       params = JSON.parse(body);
