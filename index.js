@@ -19,8 +19,10 @@ const handlers = {
   '/api/comments/create': com.comCreate,
   '/api/comments/delete': com.comDelete,
   '/api/logs': readLogs,
+  '/css/site.css': css,
   '/': home,
   '/index.html': home,
+  '/jquery.js': jquery,
   '/app.js': app
 };
 
@@ -41,11 +43,18 @@ const server = http.createServer((req, res) => {
       }
 
       res.statusCode = 200;
-      if(res.getHeader('Content-Type') == 'text/html'){
+      if(req.url == '/' || req.url == '/index.html'){
         res.setHeader('Content-Type', 'text/html');
         res.end( result );
-      }else{
-        res.setHeader('Content-Type', 'application/json');
+      }else if (req.url == '/app.js' || req.url == '/jquery.js'){
+        res.setHeader('Content-Type', 'text/javascript');
+        res.end( result );
+      }else if (req.url == '/css/site.css'){
+        res.setHeader('Content-Type', 'text/css');
+        res.end( result );
+      }
+      else{
+        res.setHeader('Content-Type', 'text/javascript');
         res.end( JSON.stringify(result) );
       }
 
@@ -99,6 +108,20 @@ function home(req, res, payload, cb) {
 
 function app(req, res, payload, cb) {
   fs.readFile('./public/index.js', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
+}
+
+function jquery(req, res, payload, cb) {
+  fs.readFile('./node_modules/jquery/dist/jquery.min.js', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
+}
+
+function css(req, res, payload, cb) {
+  fs.readFile('./public/site.css', (err, data) => {
     if (err) throw err;
     cb(null, data);
   });

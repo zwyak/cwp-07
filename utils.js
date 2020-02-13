@@ -52,7 +52,7 @@ function modifyArray(array, field = 'date', order = "DESC", limit = 10, page = 1
     pages = 1;
   }
 
-  return {items: [result], meta:{page: page, pages: pages, count: array.length, limit:limit}};
+  return {items: result, meta:{page: page, pages: pages, count: array.length, limit:limit}};
 }
 
 module.exports.modifyArray = modifyArray;
