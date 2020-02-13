@@ -24,7 +24,8 @@ const handlers = {
   '/index.html': home,
   '/form.html': form,
   '/jquery.js': jquery,
-  '/app.js': app
+  '/app.js': app,
+  '/form.js': formjs
 };
 
 const server = http.createServer((req, res) => {
@@ -47,7 +48,7 @@ const server = http.createServer((req, res) => {
       if(req.url == '/' || req.url == '/index.html' || req.url == '/form.html'){
         res.setHeader('Content-Type', 'text/html');
         res.end( result );
-      }else if (req.url == '/app.js' || req.url == '/jquery.js'){
+      }else if (req.url == '/app.js' || req.url == '/jquery.js' || req.url == '/form.js'){
         res.setHeader('Content-Type', 'text/javascript');
         res.end( result );
       }else if (req.url == '/css/site.css'){
@@ -109,6 +110,13 @@ function home(req, res, payload, cb) {
 
 function app(req, res, payload, cb) {
   fs.readFile('./public/index.js', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
+}
+
+function formjs(req, res, payload, cb) {
+  fs.readFile('./public/form.js', (err, data) => {
     if (err) throw err;
     cb(null, data);
   });

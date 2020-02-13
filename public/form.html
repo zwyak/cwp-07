@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <title>Create Article</title>
     <link rel="stylesheet" href="/css/site.css">
+    <script src="/form.js">  </script>
   </head>
   <body>
-    <form class="contact_form" action="/api/articles/create" method="post" name="contact_form">
+    <form class="contact_form" action="" method="post" name="contact_form">
       <ul>
 
        <li>
@@ -16,18 +17,18 @@
 
        <li>
        <label for="title">Title:</label>
-       <input type="text" name="title" />
+       <input id="title" type="text" name="title" />
        </li>
 
        <li>
        <label for="text">Text:</label>
-       <input type="text" name="text" />
+       <input id="text" type="text" name="text" />
        <span class="form_hint">Article Text</span>
        </li>
 
        <li>
        <label for="author">Author:</label>
-       <input type="text" name="author" />
+       <input id="author" type="text" name="author" />
        </li>
 
        <li>
