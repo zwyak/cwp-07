@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Create Article</title>
+    <link rel="stylesheet" href="/css/site.css">
+  </head>
+  <body>
+    <form class="contact_form" action="/api/articles/create" method="post" name="contact_form">
+      <ul>
+
+       <li>
+       <h2>Create Article</h2>
+       <span class="required_notification">*Required Field</span>
+       </li>
+
+       <li>
+       <label for="title">Title:</label>
+       <input type="text" name="title" />
+       </li>
+
+       <li>
+       <label for="text">Text:</label>
+       <input type="text" name="text" />
+       <span class="form_hint">Article Text</span>
+       </li>
+
+       <li>
+       <label for="author">Author:</label>
+       <input type="text" name="author" />
+       </li>
+
+       <li>
+       <button class="submit" type="submit">Create</button>
+       </li>
+
+      </ul>
+    </form>
+  </body>
+</html>

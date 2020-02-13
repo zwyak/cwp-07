@@ -22,6 +22,7 @@ const handlers = {
   '/css/site.css': css,
   '/': home,
   '/index.html': home,
+  '/form.html': form,
   '/jquery.js': jquery,
   '/app.js': app
 };
@@ -43,7 +44,7 @@ const server = http.createServer((req, res) => {
       }
 
       res.statusCode = 200;
-      if(req.url == '/' || req.url == '/index.html'){
+      if(req.url == '/' || req.url == '/index.html' || req.url == '/form.html'){
         res.setHeader('Content-Type', 'text/html');
         res.end( result );
       }else if (req.url == '/app.js' || req.url == '/jquery.js'){
@@ -122,6 +123,13 @@ function jquery(req, res, payload, cb) {
 
 function css(req, res, payload, cb) {
   fs.readFile('./public/site.css', (err, data) => {
+    if (err) throw err;
+    cb(null, data);
+  });
+}
+
+function form(req, res, payload, cb) {
+  fs.readFile('./public/form.html', (err, data) => {
     if (err) throw err;
     cb(null, data);
   });
