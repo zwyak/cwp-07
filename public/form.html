@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>Create Article</title>
     <link rel="stylesheet" href="/css/site.css">
-    <script src="/form.js">  </script>
+    <script src="./jquery.js"></script>
   </head>
   <body>
-    <form class="contact_form" action="" method="post" name="contact_form">
+    <div class="contact_form" action="" method="post" name="contact_form">
       <ul>
 
        <li>
@@ -23,7 +23,6 @@
        <li>
        <label for="text">Text:</label>
        <input id="text" type="text" name="text" />
-       <span class="form_hint">Article Text</span>
        </li>
 
        <li>
@@ -32,10 +31,12 @@
        </li>
 
        <li>
-       <button class="submit" type="submit">Create</button>
+       <button id="submit" class="submit">Create</button>
        </li>
 
       </ul>
-    </form>
+    </div>
+    <a href="/index.html" class="button28">Articles List</a>
+    <script src="/form.js">  </script>
   </body>
 </html>

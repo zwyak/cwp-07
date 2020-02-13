@@ -38,7 +38,7 @@ function generate_table() {
 function apply_pagination() {
       $pagination.twbsPagination({
             totalPages: totalPages,
-            visiblePages: 1,
+            visiblePages: totalPages,
             onPageClick: function (event, page) {
                   displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
                   endRec = (displayRecordsIndex) + recPerPage;
